@@ -26,6 +26,8 @@ d2 <- d; nj <- d2$registry=="NJR"; d2$hr[nj] <- d2$hr2[nj]; d2$lo[nj] <- d2$lo2[
 d2 <- prep(d2); cat("\nNJR at 2 years instead of 10: "); rr <- fit(d2, allm); het(rr); print(tab(rr))
 cat("\nAdjusted estimates only (drops EPRD): "); rr <- fit(d[d$adjusted=="yes",], allm); het(rr); print(tab(rr))
 saveRDS(list(d=d,res=res,rob=rob), "fit.rds")
+cat("\nExcluding imputed follow-up: "); rr <- fit(d[!grepl("imputed", d$t_source),], allm); het(rr); print(tab(rr))
+cat("\nExcluding zirconia: "); rr <- fit(d[d$id!=36,], allm); het(rr); print(tab(rr))
 
 # ---- Figures ----
 o <- readRDS("fit.rds"); d <- o$d; res <- o$res; b <- coef(res); vb <- vcov(res)
@@ -41,19 +43,10 @@ for (g in ord) { s <- d[vsx & d$cmp==g,]; hp<-c(hp,cur); hl<-c(hl,full[g]); cur<
   pooled[[g]] <- c(cur, b[g], sqrt(vb[g,g])); cur <- cur-2 }
 hp<-c(hp,cur); hl<-c(hl,"Estimates against another reference bearing (HR as reported)"); cur<-cur-1
 s <- d[oth,]; for (j in seq_len(nrow(s))) { rows<-c(rows,cur); y<-c(y,s$yi[j]); lb<-c(lb,log(s$lo[j])); ub<-c(ub,log(s$hi[j])); labs<-c(labs,s$lab[j]); cur<-cur-1 }
-png("forest.png", width=2400, height=2900, res=230); par(mar=c(4,1,1,1))
+png("forest.png", width=2400, height=3500, res=230); par(mar=c(4,1,1,1))
 fp <- forest(x=y, ci.lb=lb, ci.ub=ub, slab=labs, rows=rows, ylim=c(cur, tot+3), atransf=exp, at=log(c(0.25,0.5,1,2,4,8)),
   xlab="Hazard ratio for revision (log scale); groups are relative to metal-on-highly-cross-linked PE", header=c("Estimate","HR [95% CI]"), cex=0.6, refline=0, psize=0.9)
 for (g in ord) { p <- pooled[[g]]; addpoly(x=p[2], sei=p[3], rows=p[1], mlab="Pooled (model, at 5 years)", atransf=exp, cex=0.6, efac=0.8, ci.lb=p[2]-tcrit*p[3], ci.ub=p[2]+tcrit*p[3]) }
 text(fp$xlim[1], hp, hl, pos=4, font=2, cex=0.64); dev.off()
-cols <- c(MoCPE="#1b6ca8", CoCPE="#f4a261", CoXLPE="#2a9d8f", CoC="#e76f51", MoM="#6d597a")
-w <- 1/(d$vi + res$tau2)
-png("bubble.png", width=2000, height=1400, res=220); par(mar=c(4.5,4.5,1,1))
-plot(NA, xlim=c(0,11), ylim=log(c(0.45,6)), xlab="Follow-up time at which estimate applies (years)", ylab="HR vs metal-on-highly-cross-linked PE (log scale)", yaxt="n")
-axis(2, at=log(c(0.5,1,2,4)), labels=c("0.5","1","2","4"), las=1); abline(h=0, lty=2, col="grey50")
-set.seed(1)
-for (g in ord) { s <- vsx & d$cmp==g; jit <- (seq_len(sum(s))-mean(seq_len(sum(s))))*0.06
-  points(d$t[s]+jit, d$yi[s], pch=21, bg=adjustcolor(cols[g],0.55), col=cols[g], cex=0.6+2.2*sqrt(w[s]/max(w)))
-  tt <- seq(0.5,10.5,0.1); lines(tt, b[g] + b["time"]*(tt-5), col=cols[g], lwd=2) }
-legend("topleft", legend=full[ord], col=cols[ord], pt.bg=adjustcolor(cols[ord],0.55), pch=21, lwd=2, bty="n", cex=0.8); dev.off()
+
 cat("ok\n")

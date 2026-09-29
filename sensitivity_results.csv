@@ -1,0 +1,16 @@
+Analysis,Metal-on-conventional PE HR (95% CI),Ceramic-on-conventional PE HR (95% CI),Ceramic-on-XLPE HR (95% CI),Ceramic-on-ceramic HR (95% CI),Metal-on-metal HR (95% CI)
+Main model,1.20 (0.95 to 1.52),1.19 (0.87 to 1.61),0.91 (0.74 to 1.11),0.95 (0.74 to 1.22),2.03 (1.41 to 2.90)
+Without NJR,1.26 (0.85 to 1.84),1.56 (0.87 to 2.81),1.01 (0.77 to 1.34),0.93 (0.66 to 1.30),2.10 (1.41 to 3.14)
+Without Nordic data,1.24 (1.00 to 1.53),1.05 (0.79 to 1.40),0.81 (0.65 to 1.01),1.03 (0.76 to 1.41),3.01 (1.31 to 6.94)
+Without Dutch data (LROI),1.29 (0.94 to 1.79),1.23 (0.86 to 1.77),0.90 (0.72 to 1.14),0.96 (0.72 to 1.28),2.06 (1.41 to 3.02)
+Without German data (adjusted estimates only),1.21 (0.95 to 1.54),1.19 (0.87 to 1.63),0.92 (0.74 to 1.14),0.96 (0.74 to 1.25),2.03 (1.41 to 2.93)
+Without Kaiser,1.12 (0.86 to 1.47),1.13 (0.82 to 1.56),0.90 (0.72 to 1.12),0.93 (0.72 to 1.21),2.04 (1.42 to 2.93)
+Without AJRR,1.21 (0.96 to 1.53),1.20 (0.88 to 1.63),0.93 (0.75 to 1.16),0.96 (0.74 to 1.23),2.03 (1.41 to 2.91)
+Without HealthEast,1.20 (0.95 to 1.51),1.18 (0.87 to 1.60),0.91 (0.74 to 1.11),0.95 (0.74 to 1.22),1.89 (1.28 to 2.80)
+Excluding metal-on-metal,1.22 (0.98 to 1.51),1.20 (0.90 to 1.59),0.91 (0.76 to 1.10),0.96 (0.76 to 1.21),n/a
+Estimates at 10 years only (MoM based on a single estimate),1.37 (1.05 to 1.80),1.02 (0.77 to 1.36),0.82 (0.62 to 1.08),1.17 (0.82 to 1.67),4.10 (1.19 to 14.09)
+NJR at 2 years instead of 10,1.24 (0.98 to 1.58),1.21 (0.90 to 1.62),0.93 (0.76 to 1.14),0.96 (0.75 to 1.23),2.02 (1.43 to 2.87)
+Excluding approximated follow-up,1.22 (0.99 to 1.51),1.18 (0.90 to 1.56),0.92 (0.75 to 1.14),1.04 (0.81 to 1.34),2.64 (1.68 to 4.14)
+Excluding zirconia heads,1.23 (0.99 to 1.55),1.10 (0.81 to 1.49),0.91 (0.75 to 1.10),0.95 (0.75 to 1.21),2.01 (1.42 to 2.85)
+
+"All hazard ratios are relative to metal-on-highly-cross-linked polyethylene, estimated at 5 years of follow-up (Hartung-Knapp confidence intervals)."
